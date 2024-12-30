@@ -1,7 +1,11 @@
 package com.example.roomdatabasee.ui.viewmodel
 
+
 import com.example.roomdatabasee.model.Mahasiswa
 
+data class InsertUiState(
+    val insertUiEvent: InsertUiEvent = InsertUiEvent()
+)
 
 data class InsertUiEvent(
     val nim: String = "",
