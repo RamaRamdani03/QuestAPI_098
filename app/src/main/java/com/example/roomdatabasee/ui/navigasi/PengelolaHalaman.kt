@@ -15,6 +15,7 @@ import com.example.roomdatabasee.ui.view.DestinasiUpdate
 import com.example.roomdatabasee.ui.view.DetailScreen
 import com.example.roomdatabasee.ui.view.EntryMhsScreen
 import com.example.roomdatabasee.ui.view.HomeScreen
+import com.example.roomdatabasee.ui.view.UpdateScreen
 
 @Composable
 fun PengelolaHalaman(navController: NavHostController = rememberNavController()) {
@@ -61,6 +62,22 @@ fun PengelolaHalaman(navController: NavHostController = rememberNavController())
                             }
                         }
                     }
+                )
+            }
+        }
+        composable(
+            DestinasiUpdate.routesWithArg,
+            arguments = listOf(
+                navArgument(DestinasiUpdate.NIM) {
+                    type = NavType.StringType
+                }
+            )
+        ) {
+            val nim = it.arguments?.getString(DestinasiUpdate.NIM)
+            nim?.let { nim ->
+                UpdateScreen(
+                    onBack = {navController.popBackStack()},
+                    onNavigate = {navController.popBackStack()}
                 )
             }
         }
