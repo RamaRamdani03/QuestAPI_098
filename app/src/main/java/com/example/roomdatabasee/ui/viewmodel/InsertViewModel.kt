@@ -1,5 +1,7 @@
 package com.example.roomdatabasee.ui.viewmodel
 
+import com.example.roomdatabasee.model.Mahasiswa
+
 data class InsertUiEvent(
     val nim: String = "",
     val nama: String = "",
@@ -7,4 +9,13 @@ data class InsertUiEvent(
     val jenisKelamin: String = "",
     val kelas: String = "",
     val angkatan: String = "",
+)
+
+fun InsertUiEvent.toMhs(): Mahasiswa = Mahasiswa(
+    nim = nim,
+    nama = nama,
+    alamat = alamat,
+    jenisKelamin = jenisKelamin,
+    kelas = kelas,
+    angkatan = angkatan
 )
