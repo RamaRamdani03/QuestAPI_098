@@ -2,6 +2,7 @@ package com.example.roomdatabasee.ui.viewmodel
 
 import com.example.roomdatabasee.model.Mahasiswa
 
+
 data class InsertUiEvent(
     val nim: String = "",
     val nama: String = "",
@@ -12,6 +13,15 @@ data class InsertUiEvent(
 )
 
 fun InsertUiEvent.toMhs(): Mahasiswa = Mahasiswa(
+    nim = nim,
+    nama = nama,
+    alamat = alamat,
+    jenisKelamin = jenisKelamin,
+    kelas = kelas,
+    angkatan = angkatan
+)
+
+fun Mahasiswa.toInsertUiEvent(): InsertUiEvent = InsertUiEvent(
     nim = nim,
     nama = nama,
     alamat = alamat,
