@@ -1,6 +1,5 @@
 package com.example.roomdatabasee.ui.viewmodel
 
-
 import com.example.roomdatabasee.model.Mahasiswa
 
 data class InsertUiState(
@@ -23,6 +22,10 @@ fun InsertUiEvent.toMhs(): Mahasiswa = Mahasiswa(
     jenisKelamin = jenisKelamin,
     kelas = kelas,
     angkatan = angkatan
+)
+
+fun Mahasiswa.toUiStateMhs(): InsertUiState = InsertUiState(
+    insertUiEvent = toInsertUiEvent()
 )
 
 fun Mahasiswa.toInsertUiEvent(): InsertUiEvent = InsertUiEvent(
