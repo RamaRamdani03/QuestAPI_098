@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
@@ -32,6 +33,21 @@ import com.example.roomdatabasee.ui.navigasi.DestinasiNavigasi
 object DestinasiHome: DestinasiNavigasi{
     override val route = "home"
     override val titleRes = "Home Mhs"
+}
+
+/**
+ * The home screen displaying the loading message
+ */
+
+@Composable
+fun OnLoading(
+    modifier: Modifier = Modifier
+) {
+    Image(
+        modifier = modifier.size(100.dp),
+        painter = painterResource(com.example.roomdatabasee.R.drawable.iconloading),
+        contentDescription = stringResource(com.example.roomdatabasee.R.string.loading)
+    )
 }
 
 /**
