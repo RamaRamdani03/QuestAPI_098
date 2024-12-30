@@ -11,12 +11,42 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
 import com.example.roomdatabasee.model.Mahasiswa
 import com.example.roomdatabasee.ui.navigasi.DestinasiNavigasi
+import com.example.roomdatabasee.ui.viewmodel.DetailUiState
 
 object DestinasiDetail: DestinasiNavigasi{
     override val route = "detail"
     override val titleRes = "Detail Mhs"
     const val NIM = "nim"
     val routesWithArg = "$route/{$NIM}"
+}
+
+@Composable
+fun DetailStatus(
+    retryAction: () -> Unit,
+    modifier: Modifier = Modifier,
+    detailUiState: DetailUiState
+) {
+    when (detailUiState) {
+        is DetailUiState.Loading -> OnLoading(modifier = modifier.fillMaxSize())
+
+        is DetailUiState.Success -> {
+            if (detailUiState.mahasiswa.nim.isEmpty()) {
+                Box(
+                    modifier = modifier.fillMaxSize(),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Text("Data tidak ditemukan.")
+                }
+            } else {
+                ItemDetailMhs(
+                    mahasiswa = detailUiState.mahasiswa,
+                    modifier = modifier.fillMaxWidth()
+                )
+            }
+        }
+
+        is DetailUiState.Error -> OnError(retryAction, modifier = modifier.fillMaxSize())
+    }
 }
 
 @Composable
