@@ -15,11 +15,15 @@ sealed class HomeUiState {
     object Loading : HomeUiState()
 }
 
-class HomeViewModel (private val mhs: mahasiswaRepository): ViewModel() {
+class HomeViewModel (private val mhs: mahasiswaRepository): ViewModel(){
     var mhsUiState: HomeUiState by mutableStateOf(HomeUiState.Loading)
         private set
 
-    fun getMhs() {
+    init {
+        getMhs()
+    }
+
+    fun getMhs(){
         viewModelScope.launch {
             mhsUiState = HomeUiState.Loading
             mhsUiState = try {
