@@ -16,6 +16,12 @@ object PenyediaViewModel {
         initializer { DetailViewModel(
             createSavedStateHandle(),
             aplikasiKontak().container.kontakRepository) }
+        initializer {
+            UpdateViewModel(
+                createSavedStateHandle(),
+                aplikasiKontak().container.kontakRepository
+            )
+        }
     }
 }
 
