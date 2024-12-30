@@ -6,18 +6,62 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.compose.material3.Icon
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Edit
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
 import com.example.roomdatabasee.model.Mahasiswa
+import com.example.roomdatabasee.ui.customwidget.CostumeTopAppBar
 import com.example.roomdatabasee.ui.navigasi.DestinasiNavigasi
 import com.example.roomdatabasee.ui.viewmodel.DetailUiState
+import com.example.roomdatabasee.ui.viewmodel.DetailViewModel
+import com.example.roomdatabasee.ui.viewmodel.PenyediaViewModel
 
 object DestinasiDetail: DestinasiNavigasi{
     override val route = "detail"
     override val titleRes = "Detail Mhs"
     const val NIM = "nim"
     val routesWithArg = "$route/{$NIM}"
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun DetailScreen(
+    navigateBack: () -> Unit,
+    navigateToItemUpdate: () -> Unit,
+    modifier: Modifier = Modifier,
+    viewModel: DetailViewModel = viewModel(factory = PenyediaViewModel.Factory)
+) {
+    Scaffold(
+        topBar = {
+            CostumeTopAppBar(
+                title = DestinasiDetail.titleRes,
+                canNavigateBack = true,
+                navigateUp = navigateBack,
+            )
+        },
+        floatingActionButton = {
+            FloatingActionButton(
+                onClick = navigateToItemUpdate,
+                shape = MaterialTheme.shapes.medium,
+                modifier = Modifier.padding(18.dp)
+            ) {
+                Icon(
+                    imageVector = Icons.Default.Edit,
+                    contentDescription = "Edit Kontak"
+                )
+            }
+        }
+    ) { innerPadding ->
+        DetailStatus(
+            modifier = Modifier.padding(innerPadding),
+            detailUiState = viewModel.mahasiswaDetailState,
+            retryAction = { viewModel.getMahasiswaById() }
+        )
+    }
 }
 
 @Composable
